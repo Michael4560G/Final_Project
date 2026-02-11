@@ -1,173 +1,75 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EasyCare - Vehicle Catalog</title>
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --accent: #3498db;
-            --bg: #f4f7f6;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 600px;
-            text-align: center;
-        }
-        h1 { color: var(--primary); margin-bottom: 10px; }
-        p.subtitle { color: #7f8c8d; margin-bottom: 25px; }
-        
-        .search-box {
-            margin-bottom: 20px;
-        }
-        input {
-            width: 85%;
-            padding: 15px 20px;
-            border: 2px solid #ddd;
-            border-radius: 30px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
-        }
-        
-        .image-container {
-            margin-top: 20px;
-            min-height: 300px;
-            background: #f9f9f9;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #eee;
-            position: relative;
-            overflow: hidden;
-        }
-        #carImg {
-            max-width: 100%;
-            height: auto;
-            display: none;
-            animation: fadeIn 0.6s ease-in;
-        }
-        .loader {
-            display: none;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--accent);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            animation: spin 1s linear infinite;
-        }
-        .error-msg {
-            color: #e74c3c;
-            display: none;
-            font-weight: bold;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-    </style>
+    <link rel="stylesheet" href="test.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
 </head>
 <body>
-
-<div class="card">
-    <h1>EasyCare 🚗</h1>
-    <p class="subtitle">הזן יצרן, דגם ושנה (למשל: Suzuki SX4 2010)</p>
-    
-    <div class="search-box">
-        <input type="text" id="carInput" placeholder="הקלד כאן..." oninput="debounceSearch()">
-    </div>
-
-    <div class="image-container">
-        <div class="loader" id="loader"></div>
-        <img id="carImg" src="" alt="תמונת רכב">
-        <p id="placeholderText" style="color: #bdc3c7;">ממתין לפרטי רכב...</p>
-        <div id="errorBox" class="error-msg">לא נמצאה תמונה בקטלוג</div>
-    </div>
-</div>
-
-<script>
-    let typingTimer;
-
-    function debounceSearch() {
-        clearTimeout(typingTimer);
-        const input = document.getElementById('carInput').value;
-        // מתחיל חיפוש רק אם יש לפחות 3 מילים (יצרן דגם שנה)
-        if (input.trim().split(/\s+/).length >= 2) {
-            typingTimer = setTimeout(() => fetchVehicleImage(input), 1000);
-        }
-    }
-
-    async function fetchVehicleImage(input) {
-        const img = document.getElementById('carImg');
-        const loader = document.getElementById('loader');
-        const placeholder = document.getElementById('placeholderText');
-        const errorBox = document.getElementById('errorBox');
-
-        // פירוק הקלט לפרמטרים הנדרשים ל-API
-        const parts = input.trim().split(/\s+/);
-        const make = parts[0]; 
-        const year = parts.find(p => p.length === 4 && !isNaN(p)) || "2023";
-        const model = parts.slice(1).filter(p => p !== year).join(' ');
-
-        if (!make || !model) return;
-
-        // איפוס תצוגה
-        loader.style.display = 'block';
-        img.style.display = 'none';
-        placeholder.style.display = 'none';
-        errorBox.style.display = 'none';
-
-        const url = `https://vehicle-images2.p.rapidapi.com/vehicle_images_by_ymm?make=${make}&model=${model}&year=${year}&image_size=600`;
-        
-        const options = {
-            method: 'GET',
-            headers: {
-                'x-rapidapi-key': '7bb105564amshcad47024c1c8f67p16a0abjsnd1d8c8da26d1',
-                'x-rapidapi-host': 'vehicle-images2.p.rapidapi.com'
-            }
-        };
-
-        try {
-            const response = await fetch(url, options);
-            const resData = await response.json();
-
-            // ניתוח המבנה: images -> מערך -> url
-            if (resData.status === "SUCCESS" && resData.images && resData.images.length > 0) {
-                const imageUrl = resData.images[0].url;
-                
-                img.src = imageUrl;
-                img.onload = () => {
-                    loader.style.display = 'none';
-                    img.style.display = 'block';
-                };
-            } else {
-                throw new Error("No images in response");
-            }
-        } catch (e) {
-            console.error("Fetch Error:", e);
-            loader.style.display = 'none';
-            errorBox.style.display = 'block';
-        }
-    }
-</script>
-
+    <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team">
+                <div class="card-menu">
+                    <button class="menu-btn" onclick="toggleMenu(this)">⋮</button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="action('Preview')">Preview</a>
+                        <a href="#" onclick="action('Edit')">Edit</a>
+                        <a href="#" onclick="action('Delete')" class="delete">Delete</a>
+                    </div>
+                </div>
+              <div class="picture">
+                <img src="logos/original/suzuki.png">
+              </div>
+              <div class="team-content">
+                <h3 class="name">Suzuki SX4</h3>
+                <ul class="social">
+                    <li></li>
+                  </ul>
+                <a class = "btn_enter" href="test.html">כניסה לרכב</a>
+                <br>
+                <br>
+                <h4 class="title">2010</h4>
+              </div>
+            </div>
+          </div>
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team">
+              <div class="picture">
+                <img class="img-fluid" src="https://picsum.photos/130/130?image=839">
+              </div>
+              <div class="team-content">
+                <h3 class="name">Patricia Knott</h3>
+                <h4 class="title">Web Developer</h4>
+              </div>
+            </div>
+          </div>
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team">
+              <div class="picture">
+                <img class="img-fluid" src="https://picsum.photos/130/130?image=856">
+              </div>
+              <div class="team-content">
+                <h3 class="name">Justin Ramos</h3>
+                <h4 class="title">Web Developer</h4>
+              </div>
+            </div>
+          </div>
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team">
+              <div class="picture">
+                <img class="img-fluid" src="https://picsum.photos/130/130?image=836">
+              </div>
+              <div class="team-content">
+                <h3 class="name">Mary Huntley</h3>
+                <h4 class="title">Web Developer</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="test.js"></script>
 </body>
 </html>
