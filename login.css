@@ -117,7 +117,7 @@ body.is-loading {
 .container button {
     border-radius: 20px;
     border: 1px solid hwb(215 18% 16%);
-    background-color: #2d74d7;
+    background-color: rgb(45, 116, 215);
     color: #FFFFFF;
     font-size: clamp(11px, 1vw, 13px); /* פונט שלא נעלם במובייל */
     font-weight: bold;

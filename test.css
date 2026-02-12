@@ -196,6 +196,17 @@ body {
     color: #2d74d7;
 }
 
+.delete {
+    color: #dc3545 !important; /* צבע אדום מקצועי */
+    font-weight: 500;          /* הופך את הטקסט לקצת יותר בולט */
+}
+
+/* עיצוב במעבר עכבר (Hover) */
+.delete:hover {
+    color: #a71d2a !important; /* אדום כהה יותר כשנוגעים בקישור */
+    background-color: #fff5f5; /* הוספת רקע אדמדם עדין מאוד */
+}
+
 /* --- 7. סרגל חברתי --- */
 .our-team .social {
     width: 100%;
@@ -261,4 +272,18 @@ body {
     .btn_enter {
         padding: 10px 25px;
     }
+}
+
+/* --- 4. Footer & Extra --- */
+footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+    padding: 10px 0;
 }

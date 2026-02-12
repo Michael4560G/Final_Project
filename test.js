@@ -20,6 +20,20 @@ function toggleMenu(btn) {
     }
 }
 
+document.querySelectorAll('.our-team').forEach(card => {
+    
+    card.addEventListener('mouseleave', () => {
+        // מחפש את הדרופ-דאון בתוך הכרטיס הספציפי הזה
+        const dropdown = card.querySelector('.dropdown-content');
+        
+        // סוגר רק אם הוא באמת פתוח
+        if (dropdown && dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+            card.classList.remove('menu-open');
+        }
+    });
+});
+
 // סגירה בלחיצה מחוץ לתפריט
 window.onclick = function(event) {
     if (!event.target.matches('.menu-btn')) {
@@ -27,3 +41,4 @@ window.onclick = function(event) {
         document.querySelectorAll('.our-team').forEach(card => card.classList.remove('menu-open'));
     }
 }
+
