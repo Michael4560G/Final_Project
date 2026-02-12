@@ -41,4 +41,3 @@ window.onclick = function(event) {
         document.querySelectorAll('.our-team').forEach(card => card.classList.remove('menu-open'));
     }
 }
-

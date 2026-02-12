@@ -19,26 +19,28 @@ signInButton.addEventListener('click', () => {
         document.body.classList.remove('is-loading');
     });
 
-    // 2. טיפול במעבר בין דפים - Fade Out
-    const links = document.querySelectorAll('a');
+    // 2. בחירת כל הלינקים וגם את הכפתורים עם הקלאס הספציפי
+    // הסלקטור בוחר את כל ה-a וגם כל אלמנט עם הקלאס .login_btn
+    const navElements = document.querySelectorAll('a, .login_btn');
 
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
+    navElements.forEach(element => {
+        element.addEventListener('click', function(e) {
+            // שליפת היעד: בודק href ללינקים, או data-href לכפתורים
+            const href = this.getAttribute('href') || this.getAttribute('data-href');
             const target = this.getAttribute('target');
 
-            // בדיקה שמדובר בקישור פנימי ולא ב-Anchor (כמו #navPanel) או דף חדש
+            // אם אין כתובת יעד או שזה לינק פנימי (#), אל תפעיל את האנימציה
             if (!href || href.startsWith('#') || href.includes('http') || target === '_blank') {
                 return;
             }
 
-            // מניעת המעבר המיידי
+            // מניעת הפעולה הדיפולטיבית
             e.preventDefault();
 
-            // הוספת ה-Class שמפעיל את ה-Fade Out ב-CSS
+            // הפעלת ה-Fade Out
             document.body.classList.add('is-loading');
 
-            // המתנה לסיום האנימציה (500ms כמו ב-CSS) ואז מעבר דף
+            // מעבר דף לאחר חצי שנייה
             setTimeout(() => {
                 window.location.href = href;
             }, 500);
