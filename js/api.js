@@ -132,7 +132,7 @@ async function translateAndSave() {
             brandHeb: hebrewBrand,
             model: model,
             year: year,
-            logo: `logos/original/${englishBrand}.png`
+            logo: `images/logos/${englishBrand}.png`
         };
 
         // שמירה לתוך רשימת הרכבים הקיימת בזיכרון

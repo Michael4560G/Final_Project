@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="picture">
-                    <img src="${car.logo}" onerror="this.src='logos/original/default.png'">
+                    <img src="${car.logo}" onerror="this.src='images/logos/default.png'">
                 </div>
                 <div class="team-content">
                     <h3 class="name">${car.brandHeb} ${car.model}</h3>
