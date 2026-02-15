@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חיפוש רכב - מאגר ממשלתי</title>
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+    <div class="search-container">
+        <div class="search-card">
+            <div class="search-header">
+                <div class="header-text">
+                    <h1>חיפוש במאגר הממשלתי</h1>
+                    <p>נתונים אמיתיים ממשרד התחבורה - data.gov.il</p>
+                </div>
+            </div>
+            <div class="search-content">
+                <form id="searchForm">
+                    <label for="plateInput">מספר רישוי</label>
+                    <div class="input-wrapper">
+                        <button type="submit" class="search-btn">🔍</button>
+                        <input type="text" id="plateInput" placeholder="12-345-67" required>
+                    </div>
+                </form>
+                <div class="manual-entry">או הזן ידנית</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const plate = document.getElementById('plateInput').value.replace(/-/g, ''); // הסרת מקפים
+            // מעבר לדף התוצאות עם מספר הרכב ב-URL
+            window.location.href = `results.html?plate=${plate}`;
+        });
+    </script>
+</body>
+</html>
