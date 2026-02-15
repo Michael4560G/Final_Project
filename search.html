@@ -15,7 +15,7 @@
             <div class="search-header">
                 <div class="header-text">
                     <h1>חיפוש במאגר הממשלתי</h1>
-                    <p>נתונים אמיתיים ממשרד התחבורה - data.gov.il</p>
+                    <p>נתונים אמיתיים ממשרד התחבורה</p>
                 </div>
             </div>
 
@@ -27,7 +27,8 @@
                         <input 
                             type="tel" 
                             id="plateInput" 
-                            placeholder="הזן מספר רכב (1-8 ספרות)" 
+                            inputmode="numeric"
+                            placeholder="הזן מספר רכב" 
                             required 
                             maxlength="8" 
                             pattern="\d{1,8}"
@@ -41,34 +42,9 @@
     </div>
 
     <footer>
-        <p>
-            All Credits by EasyCare Team
-        </p>
+        <p>All Credits by EasyCare Team</p>
     </footer>
 
-    <script>
-        // לוגיקת שליחת הטופס
-        document.getElementById('searchForm').addEventListener('submit', function(e) {
-            // 1. מניעת שליחת ברירת מחדל כדי שנוכל לבדוק את הקלט
-            e.preventDefault();
-            
-            // 2. ניקוי הקלט ושליפתו
-            const plateValue = document.getElementById('plateInput').value.trim();
-            
-            // 3. בדיקת תקינות סופית: רק מספרים, בין 1 ל-8 ספרות
-            const isNumeric = /^\d+$/.test(plateValue); // בודק שזה רק מספרים
-            const isValidLength = plateValue.length >= 1 && plateValue.length <= 8;
-
-            if (isNumeric && isValidLength) {
-                // אם הכל תקין - עוברים דף
-                window.location.href = `results.html?plate=${plateValue}`;
-            } else {
-                // אם משהו השתבש (למשל המשתמש ניסה לעקוף את המערכת)
-                alert("שגיאה: נא להזין מספר רכב תקין (1 עד 8 ספרות בלבד)");
-            }
-        });
-
-        
-    </script>
+    <script src="js/search.js"></script>
 </body>
 </html>

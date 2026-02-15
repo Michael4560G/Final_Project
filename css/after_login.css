@@ -1,10 +1,9 @@
 /* --- 1. הגדרות כלליות ואתחול --- */
 * {
-    box-sizing: border-box; /* מונע מהפאדינג להגדיל את רוחב הכרטיס ולהרוס את הלייאוט */
-}
-
-
-body {
+    box-sizing: border-box; 
+    }
+    
+    body {
     font-family: 'Tahoma', sans-serif;
     min-height: 100vh;
     background-color: #ffffff;
@@ -13,72 +12,75 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 50px 10px;
-}
+    padding: 30px 10px;
+    }
 
-/* --- 2. קונטיינר גמיש (Container) --- */
-.container {
-    display: flex;
-    flex-wrap: wrap;       /* מאפשר לכרטיסים לרדת שורה בצורה חלקה */
-    justify-content: center;             /* רווח בין הכרטיסים */
-    width: 100%;
-    max-width: 200px;
-    margin: 0 auto;
-    gap: 20px;
-    min-width: 250px;
+    body.empty-dashboard {
+        justify-content: center; /* מרכוז אנכי */
+    }
     
-
-    /* הגדלנו את המקסימום כדי לתמוך בכרטיסים רחבים */
-}
-
-/* --- 3. הכרטיס (Our Team) --- */
-.our-team {
-    /* הגדלנו את הרוחב ל-380px כדי שיהיה רחב ומרשים */
-    flex: 0 1 380px; 
+    body.empty-dashboard .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1; /* נותן לקונטיינר לתפוס את כל הגובה הפנוי */
+    }
     
-    /* צמצמנו פאדינג כדי לקצר את הגובה הכללי */
-    padding: 25px 0 35px; 
+    /* ביטול ה-margin התחתון של הכרטיס כשהוא לבד באמצע המסך */
+    body.empty-dashboard .our-team {
+        margin-bottom: 0;
+    }
+    
+    /* --- 2. קונטיינר גמיש (Container) --- */
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        gap: 20px;
+        min-width: 200px;
+        }
+    
+    /* --- 3. הכרטיס (Our Team) --- */
+    .our-team {
+    width: 100%; /* הכרטיס יתפוס את רוחב העמודה של Bootstrap */
+    padding: 25px 0 35px;
     margin-bottom: 20px;
     background-color: #ffffff;
     text-align: center;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
     transition: all 0.3s ease;
     border-radius: 12px;
     box-shadow: 20px 20px 20px 20px rgba(0,0,0,0.08);
-    min-width: 250px;
-
-}
-
-/* שליטה על ה-Overflow בזמן שהתפריט פתוח */
-.our-team.menu-open {
+    /* min-width: 250px; <-- גם את זה אפשר להסיר כדי שבוטסטרפ ינהל את הרוחב */
+    }
+    
+    .our-team.menu-open {
     overflow: visible !important;
-}
-
-.our-team.menu-open::before, 
-.our-team.menu-open .picture::before {
+    }
+    
+    .our-team.menu-open::before,
+    .our-team.menu-open .picture::before {
     display: none !important;
     opacity: 0 !important;
-}
-
-/* --- 4. אזור התמונה (Logo Area) --- */
-.our-team .picture {
+    }
+    
+    /* --- 4. אזור התמונה (Logo Area) --- */
+    .our-team .picture {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 130px;
     width: 130px;
-    /* צמצמנו את המרווח התחתון מ-50px ל-25px כדי לקצר את הכרטיס */
-    margin: 0 auto 25px; 
+    margin: 0 auto 25px;
     z-index: 1;
     position: relative;
     border-radius: 50%;
     border: 5px solid #2d74d7;
     background-color: #ffffff;
-}
-
-/* אנימציית עיגול כחול ב-Hover */
-.our-team .picture::before {
+    }
+    
+    .our-team .picture::before {
     content: "";
     width: 100%;
     height: 0;
@@ -91,13 +93,13 @@ body {
     opacity: 0.9;
     transform: scale(3);
     transition: all 0.3s linear;
-}
-
-.our-team:hover .picture::before {
+    }
+    
+    .our-team:hover .picture::before {
     height: 100%;
-}
-
-.our-team .picture::after {
+    }
+    
+    .our-team .picture::after {
     content: "";
     width: 100%;
     height: 100%;
@@ -107,49 +109,49 @@ body {
     top: 0;
     left: 0;
     z-index: -1;
-}
-
-.our-team .picture img {
+    }
+    
+    .our-team .picture img {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: contain;
     border-radius: 50%;
     transition: all 0.9s ease;
     background-color: #ffffff;
-}
-
-.our-team:hover .picture img {
+    }
+    
+    .our-team:hover .picture img {
     box-shadow: 0 0 0 14px #ffffff;
     transform: scale(0.7);
-}
-
-/* --- 5. תוכן טקסטואלי --- */
-.our-team .team-content {
+    }
+    
+    /* --- 5. תוכן טקסטואלי --- */
+    .our-team .team-content {
     margin-bottom: 20px;
-}
-
-.our-team .name {
-    font-size: 22px; /* הגדלנו מעט בגלל שהקארד רחב יותר */
+    }
+    
+    .our-team .name {
+    font-size: 22px;
     font-weight: bold;
     color: #333;
     margin: 0 0 5px;
-}
-
-.our-team .title {
+    }
+    
+    .our-team .title {
     display: block;
     font-size: 15px;
     color: #4e5052;
-}
-
-/* --- 6. תפריט שלוש נקודות (Kebab Menu) --- */
-.card-menu {
+    }
+    
+    /* --- 6. תפריט שלוש נקודות (Kebab Menu) --- */
+    .card-menu {
     position: absolute;
     top: 10px;
     right: 12px;
     z-index: 100;
-}
-
-.menu-btn {
+    }
+    
+    .menu-btn {
     background: none;
     border: none;
     font-size: 26px;
@@ -160,13 +162,13 @@ body {
     padding: 5px;
     display: inline-flex;
     transition: all 0.2s ease;
-}
-
-.menu-btn:hover {
+    }
+    
+    .menu-btn:hover {
     color: #ffffff;
-}
-
-.dropdown-content {
+    }
+    
+    .dropdown-content {
     display: none;
     position: absolute;
     right: 0;
@@ -177,39 +179,38 @@ body {
     border-radius: 6px;
     border: 1px solid #eee;
     z-index: 1000;
-}
-
-.dropdown-content.show {
+    }
+    
+    .dropdown-content.show {
     display: block;
-}
-
-.dropdown-content a {
+    }
+    
+    .dropdown-content a {
     color: #444;
     padding: 10px 15px;
     text-decoration: none;
     display: block;
     font-size: 13px;
     text-align: left;
-}
-
-.dropdown-content a:hover {
+    }
+    
+    .dropdown-content a:hover {
     background-color: #f8f9fa;
     color: #2d74d7;
-}
-
-.delete {
-    color: #dc3545 !important; /* צבע אדום מקצועי */
-    font-weight: 500;          /* הופך את הטקסט לקצת יותר בולט */
-}
-
-/* עיצוב במעבר עכבר (Hover) */
-.delete:hover {
-    color: #a71d2a !important; /* אדום כהה יותר כשנוגעים בקישור */
-    background-color: #fff5f5; /* הוספת רקע אדמדם עדין מאוד */
-}
-
-/* --- 7. סרגל חברתי --- */
-.our-team .social {
+    }
+    
+    .delete {
+    color: #dc3545 !important;
+    font-weight: 500;
+    }
+    
+    .delete:hover {
+    color: #a71d2a !important;
+    background-color: #fff5f5;
+    }
+    
+    /* --- 7. סרגל חברתי --- */
+    .our-team .social {
     width: 100%;
     padding: 0;
     margin: 0;
@@ -219,26 +220,26 @@ body {
     left: 0;
     transition: all 0.5s ease;
     list-style: none;
-}
-
-.our-team:hover .social {
+    }
+    
+    .our-team:hover .social {
     bottom: 0;
-}
-
-.our-team .social li {
+    }
+    
+    .our-team .social li {
     display: inline-block;
-}
-
-.our-team .social li a {
+    }
+    
+    .our-team .social li a {
     display: block;
     padding: 10px;
     font-size: 17px;
     color: white;
     text-decoration: none;
-}
-
-/* --- 8. כפתור כניסה --- */
-.btn_enter {
+    }
+    
+    /* --- 8. כפתור כניסה --- */
+    .btn_enter {
     display: inline-flex;
     margin-top: 10px;
     border-radius: 20px;
@@ -252,44 +253,42 @@ body {
     transition: all 0.2s ease;
     cursor: pointer;
     text-decoration: none;
-}
-
-.btn_enter:hover {
+    }
+    
+    .btn_enter:hover {
     background-color: #1369ce;
     transform: translateY(-2px);
-}
-
-/* עיצוב ייחודי לכרטיס הוספה */
-/* --- כרטיס הוספת פרופיל חדש (סופי וערוך) --- */
-
-/* --- כרטיס הוספת פרופיל (גרסה סופית למראה אחיד) --- */
-
-.add-new-card {
+    }
+    
+    /* עיצוב ייחודי לכרטיס הוספה */
+    /* --- כרטיס הוספת פרופיל חדש (סופי וערוך) --- */
+    
+    /* --- כרטיס הוספת פרופיל (גרסה סופית למראה אחיד) --- */
+    
+    .add-new-card {
     /* הופך אותו לזהה במידות לשאר הקארדים */
     border: 2px dashed #2d74d7 !important;
     background-color: rgba(45, 116, 215, 0.03) !important;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: none !important;
-    
     /* ביטול הגובה הקשיח כדי שיתאים לאחרים */
-
+    
     min-width: 250px;
     max-height: 365px;
-
     
     /* העתקת הפאדינג המדויק מהקארד הרגיל שלך */
-    padding: 25px 0 30px !important; 
-}
-
-.add-new-card:hover {
+    padding: 25px 0 30px !important;
+    }
+    
+    .add-new-card:hover {
     background-color: rgba(45, 116, 215, 0.08) !important;
     transform: translateY(-5px);
     border-style: solid !important;
-}
-
-/* עיצוב העיגול (זהה במידות ל-Picture המקורי) */
-.add-placeholder {
+    }
+    
+    /* עיצוב העיגול (זהה במידות ל-Picture המקורי) */
+    .add-placeholder {
     border: 4px dashed #2d74d7 !important;
     background-color: #ffffff !important;
     width: 130px !important;
@@ -299,73 +298,92 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-}
-
-/* תמונת הפלוס */
-.plus-img {
+    }
+    
+    /* תמונת הפלוס */
+    .plus-img {
     width: 50% !important;
     height: 50% !important;
     object-fit: contain !important;
     transition: transform 0.4s ease;
-}
-
-.add-new-card:hover .plus-img {
+    }
+    
+    .add-new-card:hover .plus-img {
     transform: rotate(90deg);
-}
-
-/* התאמת התוכן למבנה של ה-BMW */
-.add-new-card .team-content {
+    }
+    
+    /* התאמת התוכן למבנה של ה-BMW */
+    .add-new-card .team-content {
     margin-bottom: 20px !important; /* זהה ל-team-content המקורי */
-}
-
-.add-new-card .name {
+    }
+    
+    .add-new-card .name {
     font-size: 22px !important;
     margin: 0 0 5px !important;
     color: #333;
-}
-
-.add-desc {
+    }
+    
+    .add-desc {
     display: block;
     font-size: 15px;
     color: #4e5052;
     margin-bottom: 10px;
-}
-
-
-
-/* הסרת הפס התחתון למראה נקי */
-.add-new-card::after {
+    }
+    
+    
+    
+    /* הסרת הפס התחתון למראה נקי */
+    .add-new-card::after {
     display: none !important;
-}
+    }
 
-/* --- 9. מובייל (Responsive) --- */
-@media (max-width: 768px) {
+    footer {
+        background-color: #222;
+        color: #fff;
+        font-size: 14px;
+        padding: 15px 0;
+        width: 100%;
+        
+        /* הפתרון למרכוז מושלם */
+        display: flex;             /* הופך את הפוטר לקונטיינר גמיש */
+        justify-content: center;   /* מרכוז אופקי */
+        align-items: center;       /* מרכוז אנכי */
+        text-align: center;        /* גיבוי למרכוז טקסט */
+    
+        /* מיקום קבוע בתחתית */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 999;
+    }
+    
+    /* איפוס שוליים של הטקסט בתוך הפוטר כדי שלא יהיו סטיות */
+    footer p {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* --- 9. מובייל (Responsive) --- */
+    @media (max-width: 768px) {
     .container {
-        gap: 20px;
+    gap: 20px;
     }
-
+    
     .our-team {
-        flex: 0 1 100%; /* כרטיס אחד בשורה */
-        max-width: 450px;
+    /* flex: 0 1 100%; <-- גם את זה אפשר להסיר כי בוטסטרפ מטפל בזה */
+    max-width: 450px;
     }
-
+    
     .btn_enter {
-        padding: 10px 25px;
+    padding: 10px 25px;
     }
-}
-
-
-
-/* --- 4. Footer & Extra --- */
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-    padding: 10px 0;
-}
+    footer {
+        position: relative; /* זורם עם התוכן ולא נדבק למסך */
+        margin-top: 40px;    /* יוצר רווח נקי מהכרטיסים/טופס */
+    }
+    
+    /* הוספת רווח בתחתית ה-body כדי שהתוכן לא יידבק לפוטר */
+    body {
+        padding-bottom: 0; 
+    }
+    }

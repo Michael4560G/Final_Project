@@ -1,12 +1,30 @@
-body { background-color: #f4f7f6; font-family: sans-serif; padding: 20px; }
+/* --- הגדרות בסיס --- */
+body { 
+    background-color: #f4f7f6; 
+    font-family: 'Tahoma', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
 .results-container {
+    width: 100%;
     max-width: 850px;
-    margin: 50px auto;
     background: white;
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     overflow: hidden;
+    margin: 20px 0;
 }
 
 .results-header {
@@ -18,16 +36,17 @@ body { background-color: #f4f7f6; font-family: sans-serif; padding: 20px; }
     font-weight: bold;
 }
 
+/* --- גריד רספונסיבי --- */
 .grid-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding: 30px;
+    gap: 15px;
+    padding: 25px;
 }
 
 .field { display: flex; flex-direction: column; }
 label { font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #444; }
-input { padding: 10px; border: 1px solid #eee; border-radius: 6px; background: #fafafa; }
+input { padding: 12px; border: 1px solid #eee; border-radius: 6px; background: #fafafa; font-size: 16px; }
 
 .tag-status {
     grid-column: span 2;
@@ -35,33 +54,101 @@ input { padding: 10px; border: 1px solid #eee; border-radius: 6px; background: #
     border-radius: 8px;
     text-align: center;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 5px;
     border: 1px solid #ddd;
 }
 
 .has-tag { background-color: #e8f5e9; color: #2d74d7; border-color: #2d74d7; }
 .no-tag { background-color: #c11717; color: #ffffff; }
 
-.action-btns { padding: 20px 30px; display: flex; gap: 15px; }
-.btn-add { flex: 2; background: #2d74d7; color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-.btn-new { flex: 1; background: white; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; }
-
-.loading-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(255,255,255,0.9);
-    display: flex; justify-content: center; align-items: center;
-    z-index: 1000; font-weight: bold;
+/* --- כפתורים בגודל שווה --- */
+.action-btns { 
+    padding: 20px 25px; 
+    display: flex; 
+    gap: 15px; 
 }
+
+.btn-add, .btn-new { 
+    flex: 1; /* מחלק את השטח שווה בשווה */
+    padding: 15px; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 16px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.btn-add { 
+    background: #2d74d7; 
+    color: white; 
+    border: none; 
+}
+
+.btn-new { 
+    background: white; 
+    border: 1px solid #ddd; 
+    color: #333;
+}
+
+.btn-add:hover { background: #1a5bb8; }
+.btn-new:hover { background: #f8f9fa; }
 
 footer {
     background-color: #222;
     color: #fff;
     font-size: 14px;
-    bottom: 0;
+    padding: 15px 0;
+    width: 100%;
+    
+    /* הפתרון למרכוז מושלם */
+    display: flex;             /* הופך את הפוטר לקונטיינר גמיש */
+    justify-content: center;   /* מרכוז אופקי */
+    align-items: center;       /* מרכוז אנכי */
+    text-align: center;        /* גיבוי למרכוז טקסט */
+
+    /* מיקום קבוע בתחתית */
     position: fixed;
+    bottom: 0;
     left: 0;
-    right: 0;
-    text-align: center;
     z-index: 999;
-    padding: 10px 0;
+}
+
+/* איפוס שוליים של הטקסט בתוך הפוטר כדי שלא יהיו סטיות */
+footer p {
+    margin: 0;
+    padding: 0;
+}
+
+/* --- התאמות לנייד --- */
+@media (max-width: 600px) {
+    .main-wrapper {
+        padding: 15px;
+        align-items: flex-start;
+    }
+
+    .grid-form {
+        grid-template-columns: 1fr;
+    }
+
+    .tag-status {
+        grid-column: span 1;
+    }
+
+    .action-btns {
+        flex-direction: column;
+    }
+
+    .btn-add, .btn-new {
+        width: 100%;
+        flex: none; /* מבטל את ה-flex השווה בשביל ערימה אנכית */
+    }
+}
+
+/* מסך טעינה */
+.loading-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.9);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000; font-weight: bold;
 }

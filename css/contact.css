@@ -1,6 +1,4 @@
-/* CSS Compiled from SCSS */
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 * {
   box-sizing: border-box;
@@ -13,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Tahoma', sans-serif;
   font-size: 10px;
   height: 100vh;
   margin: -20px 0 50px;
@@ -125,6 +123,32 @@ button:hover {
 
 form p {
   text-align: left;
+}
+
+footer {
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  padding: 15px 0;
+  width: 100%;
+  
+  /* הפתרון למרכוז מושלם */
+  display: flex;             /* הופך את הפוטר לקונטיינר גמיש */
+  justify-content: center;   /* מרכוז אופקי */
+  align-items: center;       /* מרכוז אנכי */
+  text-align: center;        /* גיבוי למרכוז טקסט */
+
+  /* מיקום קבוע בתחתית */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+
+/* איפוס שוליים של הטקסט בתוך הפוטר כדי שלא יהיו סטיות */
+footer p {
+  margin: 0;
+  padding: 0;
 }
 
 /* Media Queries */

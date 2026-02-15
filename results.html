@@ -2,48 +2,46 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>פרטי רכב נמצאו</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyCare - פרטי רכב</title>
     <link rel="stylesheet" href="css/results.css">
 </head>
 <body>
     <div id="loading" class="loading-overlay">מתחבר למאגר הממשלתי...</div>
 
-    <div class="results-container">
-        <div class="results-header">
-            <span>נמצא רכב! בדוק את הפרטים</span>
-            <span class="check-icon">✓</span>
-        </div>
-
-        <div class="grid-form">
-            <div class="field"><label>מספר רישוי</label><input type="text" id="res_plate" readonly></div>
-            <div class="field"><label>יצרן</label><input type="text" id="res_make" readonly></div>
-            <div class="field"><label>דגם</label><input type="text" id="res_model" readonly></div>
-            <div class="field"><label>שנת ייצור</label><input type="text" id="res_year" readonly></div>
-            <div class="field"><label>צבע</label><input type="text" id="res_color" readonly></div>
-            <div class="field"><label>סוג דלק</label><input type="text" id="res_fuel" readonly></div>
-            <div class="field"><label>תוקף טסט</label><input type="text" id="res_test"></div>
-            <div class="field"><label>תוקף רישיון רכב</label><input type="text" id="res_license"></div>
-            <div class="field"><label>קבוצת זיהום</label><input type="text" id="res_pollution"></div>
-            <div class="field"><label>צמיג קדמי</label><input type="text" id="res_tire_f"></div>
-            <div class="field"><label>קילומטראז' נוכחי</label><input type="text" placeholder="50000"></div>
-            <div class="field"><label>צמיג אחורי</label><input type="text" id="res_tire_r"></div>
-            
-            <div id="disabledTagBox" class="tag-status">
-                <span id="tagText">בודק זכאות לתו נכה...</span>
+    <div class="main-wrapper">
+        <div class="results-container">
+            <div class="results-header">
+                <span>פרטי הרכב</span>
             </div>
-        </div>
 
-        <div class="action-btns">
-            <button class="btn-add">הוסף רכב 🚗</button>
-            <button class="btn-new" onclick="window.location.href='search.html'">התחל מחדש</button>
+            <div class="grid-form">
+                <div class="field"><label>מספר רישוי</label><input type="text" id="res_plate" readonly></div>
+                <div class="field"><label>יצרן</label><input type="text" id="res_make" readonly></div>
+                <div class="field"><label>דגם</label><input type="text" id="res_model" readonly></div>
+                <div class="field"><label>שנת ייצור</label><input type="text" id="res_year" readonly></div>
+                <div class="field"><label>צבע</label><input type="text" id="res_color" readonly></div>
+                <div class="field"><label>סוג דלק</label><input type="text" id="res_fuel" readonly></div>
+                <div class="field"><label>תוקף טסט</label><input type="text" id="res_test"></div>
+                <div class="field"><label>תוקף רישיון רכב</label><input type="text" id="res_license"></div>
+                <div class="field"><label>קבוצת זיהום</label><input type="text" id="res_pollution" readonly></div>
+                <div class="field"><label>צמיג קדמי</label><input type="text" id="res_tire_f" readonly></div>
+                <div class="field"><label>קילומטראז' נוכחי</label><input type="text" id="res_km" placeholder="הכנס קילומטראז׳"></div>
+                <div class="field"><label>צמיג אחורי</label><input type="text" id="res_tire_r" readonly></div>
+                
+                <div id="disabledTagBox" class="tag-status">
+                    <span id="tagText">בודק זכאות לתו נכה...</span>
+                </div>
+            </div>
+
+            <div class="action-btns">
+                <button class="btn-add" id="addBtn">הוסף לרשימת הרכבים</button>
+                <button class="btn-new" onclick="window.location.href='search.html'">חיפוש מחדש</button>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>
-            All Credits by EasyCare Team
-        </p>
-    </footer>
+    <footer><p>All Credits by EasyCare Team</p></footer>
 
     <script src="js/api.js"></script>
 </body>
