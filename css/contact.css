@@ -1,0 +1,169 @@
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(90deg, #2d74d7 0%, rgba(255, 255, 255, 0.83) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 10px;
+  height: 100vh;
+  margin: -20px 0 50px;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+              0 10px 10px rgba(0,0,0,0.22);
+  position: relative;
+  overflow: hidden;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+  min-width: 370px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.form-container {
+  display: flex;
+}
+
+.left-container {
+  display: flex;
+  flex: 1;
+  height: 480px;
+  background-color: #2d74d7;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.right-container {
+  display: flex;
+  flex: 1;
+  height: 460px;
+  background-color: #ffffff;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-container p {
+  font-size: 0.9rem;
+}
+
+.right-inner-container {
+  width: 70%;
+  height: 80%;
+  text-align: center;
+}
+
+.left-inner-container {
+  height: 50%;
+  width: 80%;
+  text-align: center;
+  line-height: 22px;
+}
+
+input, textarea {
+  direction: rtl; /* קובע את כיוון הכתיבה מימין לשמאל */
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  font-size: 0.8rem;
+}
+
+input:focus, textarea:focus {
+  outline: 1px solid #2d74d7;
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid #2d74d7;
+  background-color: #2d74d7;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+}
+
+.btn_home {
+  border-radius: 20px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  color: #2d74d7;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+form p {
+  text-align: left;
+}
+
+footer {
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  padding: 15px 0;
+  width: 100%;
+  
+  /* הפתרון למרכוז מושלם */
+  display: flex;             /* הופך את הפוטר לקונטיינר גמיש */
+  justify-content: center;   /* מרכוז אופקי */
+  align-items: center;       /* מרכוז אנכי */
+  text-align: center;        /* גיבוי למרכוז טקסט */
+
+  /* מיקום קבוע בתחתית */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+
+/* איפוס שוליים של הטקסט בתוך הפוטר כדי שלא יהיו סטיות */
+footer p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 600px) {
+  .left-container {
+    display: none;
+  }
+  .lg-view {
+    display: none;  
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .sm-view {
+    display: none;  
+  }
+}
